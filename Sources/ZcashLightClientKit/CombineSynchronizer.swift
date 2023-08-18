@@ -39,13 +39,15 @@ public protocol CombineSynchronizer {
         spendingKey: UnifiedSpendingKey,
         zatoshi: Zatoshi,
         toAddress: Recipient,
-        memo: Memo?
+        memo: Memo?,
+        useZIP317Fees: Bool
     ) -> SinglePublisher<ZcashTransaction.Overview, Error>
 
     func shieldFunds(
         spendingKey: UnifiedSpendingKey,
         memo: Memo,
-        shieldingThreshold: Zatoshi
+        shieldingThreshold: Zatoshi,
+        useZIP317Fees: Bool
     ) -> SinglePublisher<ZcashTransaction.Overview, Error>
 
     var allTransactions: SinglePublisher<[ZcashTransaction.Overview], Never> { get }

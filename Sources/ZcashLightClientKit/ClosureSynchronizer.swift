@@ -41,6 +41,7 @@ public protocol ClosureSynchronizer {
         zatoshi: Zatoshi,
         toAddress: Recipient,
         memo: Memo?,
+        useZIP317Fees: Bool,
         completion: @escaping (Result<ZcashTransaction.Overview, Error>) -> Void
     )
 
@@ -48,6 +49,7 @@ public protocol ClosureSynchronizer {
         spendingKey: UnifiedSpendingKey,
         memo: Memo,
         shieldingThreshold: Zatoshi,
+        useZIP317Fees: Bool,
         completion: @escaping (Result<ZcashTransaction.Overview, Error>) -> Void
     )
 

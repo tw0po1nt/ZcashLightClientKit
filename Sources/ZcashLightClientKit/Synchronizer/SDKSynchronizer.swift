@@ -280,7 +280,8 @@ public class SDKSynchronizer: Synchronizer {
         spendingKey: UnifiedSpendingKey,
         zatoshi: Zatoshi,
         toAddress: Recipient,
-        memo: Memo?
+        memo: Memo?,
+        useZIP317Fees: Bool
     ) async throws -> ZcashTransaction.Overview {
         try throwIfUnprepared()
 
@@ -300,14 +301,16 @@ public class SDKSynchronizer: Synchronizer {
             spendingKey: spendingKey,
             zatoshi: zatoshi,
             recipient: toAddress,
-            memo: memo
+            memo: memo,
+            useZIP317Fees: useZIP317Fees
         )
     }
 
     public func shieldFunds(
         spendingKey: UnifiedSpendingKey,
         memo: Memo,
-        shieldingThreshold: Zatoshi
+        shieldingThreshold: Zatoshi,
+        useZIP317Fees: Bool
     ) async throws -> ZcashTransaction.Overview {
         try throwIfUnprepared()
 
@@ -324,7 +327,8 @@ public class SDKSynchronizer: Synchronizer {
             spendingKey: spendingKey,
             shieldingThreshold: shieldingThreshold,
             memoBytes: memo.asMemoBytes(),
-            from: Int(spendingKey.account)
+            from: Int(spendingKey.account),
+            useZIP317Fees: useZIP317Fees
         )
 
         let encodedTx = try transaction.encodedTransaction()
@@ -338,7 +342,8 @@ public class SDKSynchronizer: Synchronizer {
         spendingKey: UnifiedSpendingKey,
         zatoshi: Zatoshi,
         recipient: Recipient,
-        memo: Memo?
+        memo: Memo?,
+        useZIP317Fees: Bool
     ) async throws -> ZcashTransaction.Overview {
         do {
             if
@@ -352,7 +357,8 @@ public class SDKSynchronizer: Synchronizer {
                 zatoshi: zatoshi,
                 to: recipient.stringEncoded,
                 memoBytes: memo?.asMemoBytes(),
-                from: Int(spendingKey.account)
+                from: Int(spendingKey.account),
+                useZIP317Fees: useZIP317Fees
             )
 
             let encodedTransaction = try transaction.encodedTransaction()

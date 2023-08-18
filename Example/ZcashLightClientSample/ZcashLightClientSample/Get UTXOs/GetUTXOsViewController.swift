@@ -15,6 +15,7 @@ class GetUTXOsViewController: UIViewController {
     @IBOutlet weak var totalBalanceLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var shieldFundsButton: UIButton!
+    @IBOutlet weak var zip317Fees: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,8 @@ class GetUTXOsViewController: UIViewController {
                 let transaction = try await AppDelegate.shared.sharedSynchronizer.shieldFunds(
                     spendingKey: usk,
                     memo: try Memo(string: "shielding is fun!"),
-                    shieldingThreshold: Zatoshi(10000)
+                    shieldingThreshold: Zatoshi(10000),
+                    useZIP317Fees: zip317Fees.isOn
                 )
                 KRProgressHUD.dismiss()
                 self.messageLabel.text = "funds shielded \(transaction)"

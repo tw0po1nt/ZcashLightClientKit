@@ -177,6 +177,7 @@ public protocol Synchronizer: AnyObject {
     /// - Parameter zatoshi: the amount to send in Zatoshi.
     /// - Parameter toAddress: the recipient's address.
     /// - Parameter memo: an `Optional<Memo>`with the memo to include as part of the transaction. send `nil` when sending to transparent receivers otherwise the function will throw an error
+    /// - Parameter useZIP317Fees: a flag indicating whether to use the ZIP-317 fee structure or not
     ///
     /// If `prepare()` hasn't already been called since creating of synchronizer instance or since the last wipe then this method throws
     /// `SynchronizerErrors.notPrepared`.
@@ -184,19 +185,22 @@ public protocol Synchronizer: AnyObject {
         spendingKey: UnifiedSpendingKey,
         zatoshi: Zatoshi,
         toAddress: Recipient,
-        memo: Memo?
+        memo: Memo?,
+        useZIP317Fees: Bool
     ) async throws -> ZcashTransaction.Overview
 
     /// Shields transparent funds from the given private key into the best shielded pool of the account associated to the given `UnifiedSpendingKey`.
     /// - Parameter spendingKey: the `UnifiedSpendingKey` that allows to spend transparent funds
     /// - Parameter memo: the optional memo to include as part of the transaction.
+    /// - Parameter useZIP317Fees: a flag indicating whether to use the ZIP-317 fee structure or not
     ///
     /// If `prepare()` hasn't already been called since creating of synchronizer instance or since the last wipe then this method throws
     /// `SynchronizerErrors.notPrepared`.
     func shieldFunds(
         spendingKey: UnifiedSpendingKey,
         memo: Memo,
-        shieldingThreshold: Zatoshi
+        shieldingThreshold: Zatoshi,
+        useZIP317Fees: Bool
     ) async throws -> ZcashTransaction.Overview
 
     /// all outbound pending transactions that have been sent but are awaiting confirmations

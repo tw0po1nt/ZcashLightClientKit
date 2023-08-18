@@ -193,7 +193,8 @@ class SynchronizerOfflineTests: ZcashTestCase {
                 spendingKey: testCoordinator.spendingKey,
                 zatoshi: Zatoshi(1),
                 toAddress: .transparent(data.transparentAddress),
-                memo: nil
+                memo: nil,
+                useZIP317Fees: true
             )
             XCTFail("Send to address should fail.")
         } catch {
@@ -217,7 +218,8 @@ class SynchronizerOfflineTests: ZcashTestCase {
             _ = try await testCoordinator.synchronizer.shieldFunds(
                 spendingKey: testCoordinator.spendingKey,
                 memo: Memo(string: "memo"),
-                shieldingThreshold: Zatoshi(1)
+                shieldingThreshold: Zatoshi(1),
+                useZIP317Fees: true
             )
             XCTFail("Shield funds should fail.")
         } catch {

@@ -19,6 +19,7 @@ class SendViewController: UIViewController {
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var verifiedBalanceLabel: UILabel!
     @IBOutlet weak var maxFunds: UISwitch!
+    @IBOutlet weak var zip317Fees: UISwitch!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var synchronizerStatusLabel: UILabel!
     @IBOutlet weak var memoField: UITextView!
@@ -231,7 +232,8 @@ class SendViewController: UIViewController {
                     // swiftlint:disable:next force_try
                     toAddress: try! Recipient(recipient, network: kZcashNetwork.networkType),
                     // swiftlint:disable:next force_try
-                    memo: try! self.memoField.text.asMemo()
+                    memo: try! self.memoField.text.asMemo(),
+                    useZIP317Fees: zip317Fees.isOn
                 )
                 KRProgressHUD.dismiss()
                 loggerProxy.info("transaction created: \(pendingTransaction)")

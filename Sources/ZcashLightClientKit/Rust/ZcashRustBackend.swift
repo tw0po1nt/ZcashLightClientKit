@@ -11,7 +11,6 @@ import libzcashlc
 
 actor ZcashRustBackend: ZcashRustBackendWelding {
     let minimumConfirmations: UInt32 = 10
-    let useZIP317Fees = false
 
     let dbData: (String, UInt)
     let fsBlockDbRoot: (String, UInt)
@@ -61,7 +60,8 @@ actor ZcashRustBackend: ZcashRustBackendWelding {
         usk: UnifiedSpendingKey,
         to address: String,
         value: Int64,
-        memo: MemoBytes?
+        memo: MemoBytes?,
+        useZIP317Fees: Bool
     ) async throws -> Int64 {
         let result = usk.bytes.withUnsafeBufferPointer { uskPtr in
             zcashlc_create_to_address(
@@ -524,7 +524,8 @@ actor ZcashRustBackend: ZcashRustBackendWelding {
     func shieldFunds(
         usk: UnifiedSpendingKey,
         memo: MemoBytes?,
-        shieldingThreshold: Zatoshi
+        shieldingThreshold: Zatoshi,
+        useZIP317Fees: Bool
     ) async throws -> Int64 {
         let result = usk.bytes.withUnsafeBufferPointer { uskBuffer in
             zcashlc_shield_funds(

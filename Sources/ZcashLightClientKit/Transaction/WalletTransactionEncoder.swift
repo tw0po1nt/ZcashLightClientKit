@@ -60,14 +60,16 @@ class WalletTransactionEncoder: TransactionEncoder {
         zatoshi: Zatoshi,
         to address: String,
         memoBytes: MemoBytes?,
-        from accountIndex: Int
+        from accountIndex: Int,
+        useZIP317Fees: Bool
     ) async throws -> ZcashTransaction.Overview {
         let txId = try await createSpend(
             spendingKey: spendingKey,
             zatoshi: zatoshi,
             to: address,
             memoBytes: memoBytes,
-            from: accountIndex
+            from: accountIndex,
+            useZIP317Fees: useZIP317Fees
         )
 
         logger.debug("transaction id: \(txId)")
@@ -79,7 +81,8 @@ class WalletTransactionEncoder: TransactionEncoder {
         zatoshi: Zatoshi,
         to address: String,
         memoBytes: MemoBytes?,
-        from accountIndex: Int
+        from accountIndex: Int,
+        useZIP317Fees: Bool
     ) async throws -> Int {
         guard ensureParams(spend: self.spendParamsURL, output: self.outputParamsURL) else {
             throw ZcashError.walletTransEncoderCreateTransactionMissingSaplingParams
@@ -89,7 +92,8 @@ class WalletTransactionEncoder: TransactionEncoder {
             usk: spendingKey,
             to: address,
             value: zatoshi.amount,
-            memo: memoBytes
+            memo: memoBytes,
+            useZIP317Fees: useZIP317Fees
         )
 
         return Int(txId)
@@ -99,13 +103,15 @@ class WalletTransactionEncoder: TransactionEncoder {
         spendingKey: UnifiedSpendingKey,
         shieldingThreshold: Zatoshi,
         memoBytes: MemoBytes?,
-        from accountIndex: Int
+        from accountIndex: Int,
+        useZIP317Fees: Bool
     ) async throws -> ZcashTransaction.Overview {
         let txId = try await createShieldingSpend(
             spendingKey: spendingKey,
             shieldingThreshold: shieldingThreshold,
             memo: memoBytes,
-            accountIndex: accountIndex
+            accountIndex: accountIndex,
+            useZIP317Fees: useZIP317Fees
         )
         
         logger.debug("transaction id: \(txId)")
@@ -116,7 +122,8 @@ class WalletTransactionEncoder: TransactionEncoder {
         spendingKey: UnifiedSpendingKey,
         shieldingThreshold: Zatoshi,
         memo: MemoBytes?,
-        accountIndex: Int
+        accountIndex: Int,
+        useZIP317Fees: Bool
     ) async throws -> Int {
         guard ensureParams(spend: self.spendParamsURL, output: self.outputParamsURL) else {
             throw ZcashError.walletTransEncoderShieldFundsMissingSaplingParams
@@ -125,7 +132,8 @@ class WalletTransactionEncoder: TransactionEncoder {
         let txId = try await rustBackend.shieldFunds(
             usk: spendingKey,
             memo: memo,
-            shieldingThreshold: shieldingThreshold
+            shieldingThreshold: shieldingThreshold,
+            useZIP317Fees: useZIP317Fees
         )
                 
         return Int(txId)

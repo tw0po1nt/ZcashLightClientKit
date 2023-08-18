@@ -75,10 +75,11 @@ extension ClosureSDKSynchronizer: ClosureSynchronizer {
         zatoshi: Zatoshi,
         toAddress: Recipient,
         memo: Memo?,
+        useZIP317Fees: Bool,
         completion: @escaping (Result<ZcashTransaction.Overview, Error>) -> Void
     ) {
         AsyncToClosureGateway.executeThrowingAction(completion) {
-            try await self.synchronizer.sendToAddress(spendingKey: spendingKey, zatoshi: zatoshi, toAddress: toAddress, memo: memo)
+            try await self.synchronizer.sendToAddress(spendingKey: spendingKey, zatoshi: zatoshi, toAddress: toAddress, memo: memo, useZIP317Fees: useZIP317Fees)
         }
     }
 
@@ -86,10 +87,11 @@ extension ClosureSDKSynchronizer: ClosureSynchronizer {
         spendingKey: UnifiedSpendingKey,
         memo: Memo,
         shieldingThreshold: Zatoshi,
+        useZIP317Fees: Bool,
         completion: @escaping (Result<ZcashTransaction.Overview, Error>) -> Void
     ) {
         AsyncToClosureGateway.executeThrowingAction(completion) {
-            try await self.synchronizer.shieldFunds(spendingKey: spendingKey, memo: memo, shieldingThreshold: shieldingThreshold)
+            try await self.synchronizer.shieldFunds(spendingKey: spendingKey, memo: memo, shieldingThreshold: shieldingThreshold, useZIP317Fees: useZIP317Fees)
         }
     }
 

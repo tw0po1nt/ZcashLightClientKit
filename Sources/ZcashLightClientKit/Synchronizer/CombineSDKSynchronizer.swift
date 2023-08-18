@@ -73,20 +73,22 @@ extension CombineSDKSynchronizer: CombineSynchronizer {
         spendingKey: UnifiedSpendingKey,
         zatoshi: Zatoshi,
         toAddress: Recipient,
-        memo: Memo?
+        memo: Memo?,
+        useZIP317Fees: Bool
     ) -> SinglePublisher<ZcashTransaction.Overview, Error> {
         AsyncToCombineGateway.executeThrowingAction() {
-            try await self.synchronizer.sendToAddress(spendingKey: spendingKey, zatoshi: zatoshi, toAddress: toAddress, memo: memo)
+            try await self.synchronizer.sendToAddress(spendingKey: spendingKey, zatoshi: zatoshi, toAddress: toAddress, memo: memo, useZIP317Fees: useZIP317Fees)
         }
     }
 
     public func shieldFunds(
         spendingKey: UnifiedSpendingKey,
         memo: Memo,
-        shieldingThreshold: Zatoshi
+        shieldingThreshold: Zatoshi,
+        useZIP317Fees: Bool
     ) -> SinglePublisher<ZcashTransaction.Overview, Error> {
         AsyncToCombineGateway.executeThrowingAction() {
-            try await self.synchronizer.shieldFunds(spendingKey: spendingKey, memo: memo, shieldingThreshold: shieldingThreshold)
+            try await self.synchronizer.shieldFunds(spendingKey: spendingKey, memo: memo, shieldingThreshold: shieldingThreshold, useZIP317Fees: useZIP317Fees)
         }
     }
 

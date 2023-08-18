@@ -13,6 +13,7 @@ import XCTest
 class Z2TReceiveTests: ZcashTestCase {
     let testRecipientAddress = "t1dRJRY7GmyeykJnMH38mdQoaZtFhn1QmGz"
     let sendAmount: Int64 = 1000
+    let useZIP317Fees = true
     var birthday: BlockHeight = 663150
     let defaultLatestHeight: BlockHeight = 663175
     var coordinator: TestCoordinator!
@@ -95,7 +96,8 @@ class Z2TReceiveTests: ZcashTestCase {
                 spendingKey: coordinator.spendingKey,
                 zatoshi: sendAmount,
                 toAddress: try! Recipient(testRecipientAddress, network: self.network.networkType),
-                memo: try Memo(string: "test transaction")
+                memo: try Memo(string: "test transaction"),
+                useZIP317Fees: useZIP317Fees
             )
 
             XCTFail("Should have thrown error")
@@ -148,7 +150,8 @@ class Z2TReceiveTests: ZcashTestCase {
                 spendingKey: coordinator.spendingKey,
                 zatoshi: sendAmount,
                 toAddress: try! Recipient(testRecipientAddress, network: self.network.networkType),
-                memo: nil
+                memo: nil,
+                useZIP317Fees: useZIP317Fees
             )
             pendingEntity = pending
             sendExpectation.fulfill()

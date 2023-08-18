@@ -16,6 +16,7 @@ class BalanceTests: ZcashTestCase {
     let branchID = "2bb40e60"
     let chainName = "main"
     let network: ZcashNetwork = DarksideWalletDNetwork()
+    let useZIP317Fees = true
 
     var birthday: BlockHeight = 663150
     var sentTransactionExpectation = XCTestExpectation(description: "sent")
@@ -93,7 +94,8 @@ class BalanceTests: ZcashTestCase {
                 spendingKey: spendingKey,
                 zatoshi: maxBalance,
                 toAddress: try Recipient(Environment.testRecipientAddress, network: self.network.networkType),
-                memo: try Memo(string: "this is a test")
+                memo: try Memo(string: "this is a test"),
+                useZIP317Fees: useZIP317Fees
             )
             pendingTx = transaction
             self.sentTransactionExpectation.fulfill()
@@ -241,7 +243,8 @@ class BalanceTests: ZcashTestCase {
                 spendingKey: spendingKey,
                 zatoshi: maxBalanceMinusOne,
                 toAddress: try Recipient(Environment.testRecipientAddress, network: self.network.networkType),
-                memo: try Memo(string: "\(self.description) \(Date().description)")
+                memo: try Memo(string: "\(self.description) \(Date().description)"),
+                useZIP317Fees: useZIP317Fees
             )
             pendingTx = transaction
             self.sentTransactionExpectation.fulfill()
@@ -385,7 +388,8 @@ class BalanceTests: ZcashTestCase {
                 spendingKey: spendingKey,
                 zatoshi: maxBalanceMinusOne,
                 toAddress: try Recipient(Environment.testRecipientAddress, network: self.network.networkType),
-                memo: try Memo(string: "\(self.description) \(Date().description)")
+                memo: try Memo(string: "\(self.description) \(Date().description)"),
+                useZIP317Fees: useZIP317Fees
             )
         } catch {
             guard
@@ -450,7 +454,8 @@ class BalanceTests: ZcashTestCase {
                 spendingKey: spendingKey,
                 zatoshi: maxBalanceMinusFee,
                 toAddress: try Recipient(Environment.testRecipientAddress, network: self.network.networkType),
-                memo: try Memo(string: "test send \(self.description) \(Date().description)")
+                memo: try Memo(string: "test send \(self.description) \(Date().description)"),
+                useZIP317Fees: useZIP317Fees
             )
             pendingTx = transaction
             self.sentTransactionExpectation.fulfill()
@@ -604,7 +609,8 @@ class BalanceTests: ZcashTestCase {
             spendingKey: spendingKey,
             zatoshi: sendAmount,
             toAddress: try Recipient(Environment.testRecipientAddress, network: self.network.networkType),
-            memo: try Memo(string: "this is a test")
+            memo: try Memo(string: "this is a test"),
+            useZIP317Fees: useZIP317Fees
         )
         pendingTx = transaction
         self.sentTransactionExpectation.fulfill()
@@ -746,7 +752,8 @@ class BalanceTests: ZcashTestCase {
                 spendingKey: spendingKey,
                 zatoshi: sendAmount,
                 toAddress: try Recipient(Environment.testRecipientAddress, network: self.network.networkType),
-                memo: try Memo(string: "test send \(self.description) \(Date().description)")
+                memo: try Memo(string: "test send \(self.description) \(Date().description)"),
+                useZIP317Fees: useZIP317Fees
             )
             pendingTx = transaction
             self.sentTransactionExpectation.fulfill()
@@ -909,7 +916,8 @@ class BalanceTests: ZcashTestCase {
             spendingKey: spendingKey,
             zatoshi: sendAmount,
             toAddress: try Recipient(Environment.testRecipientAddress, network: self.network.networkType),
-            memo: memo
+            memo: memo,
+            useZIP317Fees: useZIP317Fees
         )
         pendingTx = transaction
         sendExpectation.fulfill()
@@ -1074,7 +1082,8 @@ class BalanceTests: ZcashTestCase {
                 spendingKey: spendingKey,
                 zatoshi: sendAmount,
                 toAddress: try Recipient(Environment.testRecipientAddress, network: self.network.networkType),
-                memo: try Memo(string: "test send \(self.description)")
+                memo: try Memo(string: "test send \(self.description)"),
+                useZIP317Fees: useZIP317Fees
             )
             pendingTx = pending
             sendExpectation.fulfill()

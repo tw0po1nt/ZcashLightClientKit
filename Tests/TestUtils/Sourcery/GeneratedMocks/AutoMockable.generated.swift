@@ -183,49 +183,49 @@ class SynchronizerMock: Synchronizer {
 
     // MARK: - sendToAddress
 
-    var sendToAddressSpendingKeyZatoshiToAddressMemoThrowableError: Error?
-    var sendToAddressSpendingKeyZatoshiToAddressMemoCallsCount = 0
-    var sendToAddressSpendingKeyZatoshiToAddressMemoCalled: Bool {
-        return sendToAddressSpendingKeyZatoshiToAddressMemoCallsCount > 0
+    var sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesThrowableError: Error?
+    var sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesCallsCount = 0
+    var sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesCalled: Bool {
+        return sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesCallsCount > 0
     }
-    var sendToAddressSpendingKeyZatoshiToAddressMemoReceivedArguments: (spendingKey: UnifiedSpendingKey, zatoshi: Zatoshi, toAddress: Recipient, memo: Memo?)?
-    var sendToAddressSpendingKeyZatoshiToAddressMemoReturnValue: ZcashTransaction.Overview!
-    var sendToAddressSpendingKeyZatoshiToAddressMemoClosure: ((UnifiedSpendingKey, Zatoshi, Recipient, Memo?) async throws -> ZcashTransaction.Overview)?
+    var sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesReceivedArguments: (spendingKey: UnifiedSpendingKey, zatoshi: Zatoshi, toAddress: Recipient, memo: Memo?, useZIP317Fees: Bool)?
+    var sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesReturnValue: ZcashTransaction.Overview!
+    var sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesClosure: ((UnifiedSpendingKey, Zatoshi, Recipient, Memo?, Bool) async throws -> ZcashTransaction.Overview)?
 
-    func sendToAddress(spendingKey: UnifiedSpendingKey, zatoshi: Zatoshi, toAddress: Recipient, memo: Memo?) async throws -> ZcashTransaction.Overview {
-        if let error = sendToAddressSpendingKeyZatoshiToAddressMemoThrowableError {
+    func sendToAddress(spendingKey: UnifiedSpendingKey, zatoshi: Zatoshi, toAddress: Recipient, memo: Memo?, useZIP317Fees: Bool) async throws -> ZcashTransaction.Overview {
+        if let error = sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesThrowableError {
             throw error
         }
-        sendToAddressSpendingKeyZatoshiToAddressMemoCallsCount += 1
-        sendToAddressSpendingKeyZatoshiToAddressMemoReceivedArguments = (spendingKey: spendingKey, zatoshi: zatoshi, toAddress: toAddress, memo: memo)
-        if let closure = sendToAddressSpendingKeyZatoshiToAddressMemoClosure {
-            return try await closure(spendingKey, zatoshi, toAddress, memo)
+        sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesCallsCount += 1
+        sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesReceivedArguments = (spendingKey: spendingKey, zatoshi: zatoshi, toAddress: toAddress, memo: memo, useZIP317Fees: useZIP317Fees)
+        if let closure = sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesClosure {
+            return try await closure(spendingKey, zatoshi, toAddress, memo, useZIP317Fees)
         } else {
-            return sendToAddressSpendingKeyZatoshiToAddressMemoReturnValue
+            return sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesReturnValue
         }
     }
 
     // MARK: - shieldFunds
 
-    var shieldFundsSpendingKeyMemoShieldingThresholdThrowableError: Error?
-    var shieldFundsSpendingKeyMemoShieldingThresholdCallsCount = 0
-    var shieldFundsSpendingKeyMemoShieldingThresholdCalled: Bool {
-        return shieldFundsSpendingKeyMemoShieldingThresholdCallsCount > 0
+    var shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesThrowableError: Error?
+    var shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesCallsCount = 0
+    var shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesCalled: Bool {
+        return shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesCallsCount > 0
     }
-    var shieldFundsSpendingKeyMemoShieldingThresholdReceivedArguments: (spendingKey: UnifiedSpendingKey, memo: Memo, shieldingThreshold: Zatoshi)?
-    var shieldFundsSpendingKeyMemoShieldingThresholdReturnValue: ZcashTransaction.Overview!
-    var shieldFundsSpendingKeyMemoShieldingThresholdClosure: ((UnifiedSpendingKey, Memo, Zatoshi) async throws -> ZcashTransaction.Overview)?
+    var shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesReceivedArguments: (spendingKey: UnifiedSpendingKey, memo: Memo, shieldingThreshold: Zatoshi, useZIP317Fees: Bool)?
+    var shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesReturnValue: ZcashTransaction.Overview!
+    var shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesClosure: ((UnifiedSpendingKey, Memo, Zatoshi, Bool) async throws -> ZcashTransaction.Overview)?
 
-    func shieldFunds(spendingKey: UnifiedSpendingKey, memo: Memo, shieldingThreshold: Zatoshi) async throws -> ZcashTransaction.Overview {
-        if let error = shieldFundsSpendingKeyMemoShieldingThresholdThrowableError {
+    func shieldFunds(spendingKey: UnifiedSpendingKey, memo: Memo, shieldingThreshold: Zatoshi, useZIP317Fees: Bool) async throws -> ZcashTransaction.Overview {
+        if let error = shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesThrowableError {
             throw error
         }
-        shieldFundsSpendingKeyMemoShieldingThresholdCallsCount += 1
-        shieldFundsSpendingKeyMemoShieldingThresholdReceivedArguments = (spendingKey: spendingKey, memo: memo, shieldingThreshold: shieldingThreshold)
-        if let closure = shieldFundsSpendingKeyMemoShieldingThresholdClosure {
-            return try await closure(spendingKey, memo, shieldingThreshold)
+        shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesCallsCount += 1
+        shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesReceivedArguments = (spendingKey: spendingKey, memo: memo, shieldingThreshold: shieldingThreshold, useZIP317Fees: useZIP317Fees)
+        if let closure = shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesClosure {
+            return try await closure(spendingKey, memo, shieldingThreshold, useZIP317Fees)
         } else {
-            return shieldFundsSpendingKeyMemoShieldingThresholdReturnValue
+            return shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesReturnValue
         }
     }
 
@@ -561,34 +561,34 @@ actor ZcashRustBackendWeldingMock: ZcashRustBackendWelding {
 
     // MARK: - createToAddress
 
-    var createToAddressUskToValueMemoThrowableError: Error?
-    func setCreateToAddressUskToValueMemoThrowableError(_ param: Error?) async {
-        createToAddressUskToValueMemoThrowableError = param
+    var createToAddressUskToValueMemoUseZIP317FeesThrowableError: Error?
+    func setCreateToAddressUskToValueMemoUseZIP317FeesThrowableError(_ param: Error?) async {
+        createToAddressUskToValueMemoUseZIP317FeesThrowableError = param
     }
-    var createToAddressUskToValueMemoCallsCount = 0
-    var createToAddressUskToValueMemoCalled: Bool {
-        return createToAddressUskToValueMemoCallsCount > 0
+    var createToAddressUskToValueMemoUseZIP317FeesCallsCount = 0
+    var createToAddressUskToValueMemoUseZIP317FeesCalled: Bool {
+        return createToAddressUskToValueMemoUseZIP317FeesCallsCount > 0
     }
-    var createToAddressUskToValueMemoReceivedArguments: (usk: UnifiedSpendingKey, address: String, value: Int64, memo: MemoBytes?)?
-    var createToAddressUskToValueMemoReturnValue: Int64!
-    func setCreateToAddressUskToValueMemoReturnValue(_ param: Int64) async {
-        createToAddressUskToValueMemoReturnValue = param
+    var createToAddressUskToValueMemoUseZIP317FeesReceivedArguments: (usk: UnifiedSpendingKey, address: String, value: Int64, memo: MemoBytes?, useZIP317Fees: Bool)?
+    var createToAddressUskToValueMemoUseZIP317FeesReturnValue: Int64!
+    func setCreateToAddressUskToValueMemoUseZIP317FeesReturnValue(_ param: Int64) async {
+        createToAddressUskToValueMemoUseZIP317FeesReturnValue = param
     }
-    var createToAddressUskToValueMemoClosure: ((UnifiedSpendingKey, String, Int64, MemoBytes?) async throws -> Int64)?
-    func setCreateToAddressUskToValueMemoClosure(_ param: ((UnifiedSpendingKey, String, Int64, MemoBytes?) async throws -> Int64)?) async {
-        createToAddressUskToValueMemoClosure = param
+    var createToAddressUskToValueMemoUseZIP317FeesClosure: ((UnifiedSpendingKey, String, Int64, MemoBytes?, Bool) async throws -> Int64)?
+    func setCreateToAddressUskToValueMemoUseZIP317FeesClosure(_ param: ((UnifiedSpendingKey, String, Int64, MemoBytes?, Bool) async throws -> Int64)?) async {
+        createToAddressUskToValueMemoUseZIP317FeesClosure = param
     }
 
-    func createToAddress(usk: UnifiedSpendingKey, to address: String, value: Int64, memo: MemoBytes?) async throws -> Int64 {
-        if let error = createToAddressUskToValueMemoThrowableError {
+    func createToAddress(usk: UnifiedSpendingKey, to address: String, value: Int64, memo: MemoBytes?, useZIP317Fees: Bool) async throws -> Int64 {
+        if let error = createToAddressUskToValueMemoUseZIP317FeesThrowableError {
             throw error
         }
-        createToAddressUskToValueMemoCallsCount += 1
-        createToAddressUskToValueMemoReceivedArguments = (usk: usk, address: address, value: value, memo: memo)
-        if let closure = createToAddressUskToValueMemoClosure {
-            return try await closure(usk, address, value, memo)
+        createToAddressUskToValueMemoUseZIP317FeesCallsCount += 1
+        createToAddressUskToValueMemoUseZIP317FeesReceivedArguments = (usk: usk, address: address, value: value, memo: memo, useZIP317Fees: useZIP317Fees)
+        if let closure = createToAddressUskToValueMemoUseZIP317FeesClosure {
+            return try await closure(usk, address, value, memo, useZIP317Fees)
         } else {
-            return createToAddressUskToValueMemoReturnValue
+            return createToAddressUskToValueMemoUseZIP317FeesReturnValue
         }
     }
 
@@ -1143,34 +1143,34 @@ actor ZcashRustBackendWeldingMock: ZcashRustBackendWelding {
 
     // MARK: - shieldFunds
 
-    var shieldFundsUskMemoShieldingThresholdThrowableError: Error?
-    func setShieldFundsUskMemoShieldingThresholdThrowableError(_ param: Error?) async {
-        shieldFundsUskMemoShieldingThresholdThrowableError = param
+    var shieldFundsUskMemoShieldingThresholdUseZIP317FeesThrowableError: Error?
+    func setShieldFundsUskMemoShieldingThresholdUseZIP317FeesThrowableError(_ param: Error?) async {
+        shieldFundsUskMemoShieldingThresholdUseZIP317FeesThrowableError = param
     }
-    var shieldFundsUskMemoShieldingThresholdCallsCount = 0
-    var shieldFundsUskMemoShieldingThresholdCalled: Bool {
-        return shieldFundsUskMemoShieldingThresholdCallsCount > 0
+    var shieldFundsUskMemoShieldingThresholdUseZIP317FeesCallsCount = 0
+    var shieldFundsUskMemoShieldingThresholdUseZIP317FeesCalled: Bool {
+        return shieldFundsUskMemoShieldingThresholdUseZIP317FeesCallsCount > 0
     }
-    var shieldFundsUskMemoShieldingThresholdReceivedArguments: (usk: UnifiedSpendingKey, memo: MemoBytes?, shieldingThreshold: Zatoshi)?
-    var shieldFundsUskMemoShieldingThresholdReturnValue: Int64!
-    func setShieldFundsUskMemoShieldingThresholdReturnValue(_ param: Int64) async {
-        shieldFundsUskMemoShieldingThresholdReturnValue = param
+    var shieldFundsUskMemoShieldingThresholdUseZIP317FeesReceivedArguments: (usk: UnifiedSpendingKey, memo: MemoBytes?, shieldingThreshold: Zatoshi, useZIP317Fees: Bool)?
+    var shieldFundsUskMemoShieldingThresholdUseZIP317FeesReturnValue: Int64!
+    func setShieldFundsUskMemoShieldingThresholdUseZIP317FeesReturnValue(_ param: Int64) async {
+        shieldFundsUskMemoShieldingThresholdUseZIP317FeesReturnValue = param
     }
-    var shieldFundsUskMemoShieldingThresholdClosure: ((UnifiedSpendingKey, MemoBytes?, Zatoshi) async throws -> Int64)?
-    func setShieldFundsUskMemoShieldingThresholdClosure(_ param: ((UnifiedSpendingKey, MemoBytes?, Zatoshi) async throws -> Int64)?) async {
-        shieldFundsUskMemoShieldingThresholdClosure = param
+    var shieldFundsUskMemoShieldingThresholdUseZIP317FeesClosure: ((UnifiedSpendingKey, MemoBytes?, Zatoshi, Bool) async throws -> Int64)?
+    func setShieldFundsUskMemoShieldingThresholdUseZIP317FeesClosure(_ param: ((UnifiedSpendingKey, MemoBytes?, Zatoshi, Bool) async throws -> Int64)?) async {
+        shieldFundsUskMemoShieldingThresholdUseZIP317FeesClosure = param
     }
 
-    func shieldFunds(usk: UnifiedSpendingKey, memo: MemoBytes?, shieldingThreshold: Zatoshi) async throws -> Int64 {
-        if let error = shieldFundsUskMemoShieldingThresholdThrowableError {
+    func shieldFunds(usk: UnifiedSpendingKey, memo: MemoBytes?, shieldingThreshold: Zatoshi, useZIP317Fees: Bool) async throws -> Int64 {
+        if let error = shieldFundsUskMemoShieldingThresholdUseZIP317FeesThrowableError {
             throw error
         }
-        shieldFundsUskMemoShieldingThresholdCallsCount += 1
-        shieldFundsUskMemoShieldingThresholdReceivedArguments = (usk: usk, memo: memo, shieldingThreshold: shieldingThreshold)
-        if let closure = shieldFundsUskMemoShieldingThresholdClosure {
-            return try await closure(usk, memo, shieldingThreshold)
+        shieldFundsUskMemoShieldingThresholdUseZIP317FeesCallsCount += 1
+        shieldFundsUskMemoShieldingThresholdUseZIP317FeesReceivedArguments = (usk: usk, memo: memo, shieldingThreshold: shieldingThreshold, useZIP317Fees: useZIP317Fees)
+        if let closure = shieldFundsUskMemoShieldingThresholdUseZIP317FeesClosure {
+            return try await closure(usk, memo, shieldingThreshold, useZIP317Fees)
         } else {
-            return shieldFundsUskMemoShieldingThresholdReturnValue
+            return shieldFundsUskMemoShieldingThresholdUseZIP317FeesReturnValue
         }
     }
 

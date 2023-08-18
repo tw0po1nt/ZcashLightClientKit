@@ -311,19 +311,21 @@ class ClosureSynchronizerOfflineTests: XCTestCase {
         let recipient: Recipient = .transparent(data.transparentAddress)
         let memo: Memo = .text(try MemoText("Some message"))
         let mockedSpendingKey = data.spendingKey
+        let useZIP317Fees = true
 
         synchronizerMock
-            .sendToAddressSpendingKeyZatoshiToAddressMemoClosure = { receivedSpendingKey, receivedZatoshi, receivedToAddress, receivedMemo in
+            .sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesClosure = { receivedSpendingKey, receivedZatoshi, receivedToAddress, receivedMemo, receivedUseZIP317Fee in
                 XCTAssertEqual(receivedSpendingKey, mockedSpendingKey)
                 XCTAssertEqual(receivedZatoshi, amount)
                 XCTAssertEqual(receivedToAddress, recipient)
                 XCTAssertEqual(receivedMemo, memo)
+                XCTAssertEqual(receivedUseZIP317Fee, useZIP317Fees)
                 return self.data.pendingTransactionEntity
             }
 
         let expectation = XCTestExpectation()
 
-        synchronizer.sendToAddress(spendingKey: mockedSpendingKey, zatoshi: amount, toAddress: recipient, memo: memo) { result in
+        synchronizer.sendToAddress(spendingKey: mockedSpendingKey, zatoshi: amount, toAddress: recipient, memo: memo, useZIP317Fees: useZIP317Fees) { result in
             switch result {
             case let .success(receivedEntity):
 
@@ -342,14 +344,15 @@ class ClosureSynchronizerOfflineTests: XCTestCase {
         let recipient: Recipient = .transparent(data.transparentAddress)
         let memo: Memo = .text(try MemoText("Some message"))
         let mockedSpendingKey = data.spendingKey
-
-        synchronizerMock.sendToAddressSpendingKeyZatoshiToAddressMemoClosure = { _, _, _, _ in
+        let useZIP317Fees = true
+        
+        synchronizerMock.sendToAddressSpendingKeyZatoshiToAddressMemoUseZIP317FeesClosure = { _, _, _, _, _ in
             throw "Some error"
         }
 
         let expectation = XCTestExpectation()
 
-        synchronizer.sendToAddress(spendingKey: mockedSpendingKey, zatoshi: amount, toAddress: recipient, memo: memo) { result in
+        synchronizer.sendToAddress(spendingKey: mockedSpendingKey, zatoshi: amount, toAddress: recipient, memo: memo, useZIP317Fees: useZIP317Fees) { result in
             switch result {
             case .success:
                 XCTFail("Error should be thrown.")
@@ -365,17 +368,19 @@ class ClosureSynchronizerOfflineTests: XCTestCase {
         let memo: Memo = .text(try MemoText("Some message"))
         let shieldingThreshold = Zatoshi(1)
         let mockedSpendingKey = data.spendingKey
+        let useZIP317Fees = true
 
-        synchronizerMock.shieldFundsSpendingKeyMemoShieldingThresholdClosure = { receivedSpendingKey, receivedMemo, receivedShieldingThreshold in
+        synchronizerMock.shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesClosure = { receivedSpendingKey, receivedMemo, receivedShieldingThreshold, receivedUseZIP317Fees in
             XCTAssertEqual(receivedSpendingKey, mockedSpendingKey)
             XCTAssertEqual(receivedMemo, memo)
             XCTAssertEqual(receivedShieldingThreshold, shieldingThreshold)
+            XCTAssertEqual(receivedUseZIP317Fees, useZIP317Fees)
             return self.data.pendingTransactionEntity
         }
 
         let expectation = XCTestExpectation()
 
-        synchronizer.shieldFunds(spendingKey: mockedSpendingKey, memo: memo, shieldingThreshold: shieldingThreshold) { result in
+        synchronizer.shieldFunds(spendingKey: mockedSpendingKey, memo: memo, shieldingThreshold: shieldingThreshold, useZIP317Fees: useZIP317Fees) { result in
             switch result {
             case let .success(receivedEntity):
                 XCTAssertEqual(receivedEntity.value, self.data.pendingTransactionEntity.value)
@@ -392,14 +397,15 @@ class ClosureSynchronizerOfflineTests: XCTestCase {
         let memo: Memo = .text(try MemoText("Some message"))
         let shieldingThreshold = Zatoshi(1)
         let mockedSpendingKey = data.spendingKey
+        let useZIP317Fees = true
 
-        synchronizerMock.shieldFundsSpendingKeyMemoShieldingThresholdClosure = { _, _, _ in
+        synchronizerMock.shieldFundsSpendingKeyMemoShieldingThresholdUseZIP317FeesClosure = { _, _, _, _ in
             throw "Some error"
         }
 
         let expectation = XCTestExpectation()
 
-        synchronizer.shieldFunds(spendingKey: mockedSpendingKey, memo: memo, shieldingThreshold: shieldingThreshold) { result in
+        synchronizer.shieldFunds(spendingKey: mockedSpendingKey, memo: memo, shieldingThreshold: shieldingThreshold, useZIP317Fees: useZIP317Fees) { result in
             switch result {
             case .success:
                 XCTFail("Error should be thrown.")

@@ -44,12 +44,14 @@ protocol ZcashRustBackendWelding {
     /// - Parameter to: recipient address
     /// - Parameter value: transaction amount in Zatoshi
     /// - Parameter memo: the `MemoBytes` for this transaction. pass `nil` when sending to transparent receivers
+    /// - Parameter useZIP317Fees: a flag indicating whether to use the ZIP-317 fee structure or not
     /// - Throws: `rustCreateToAddress`.
     func createToAddress(
         usk: UnifiedSpendingKey,
         to address: String,
         value: Int64,
-        memo: MemoBytes?
+        memo: MemoBytes?,
+        useZIP317Fees: Bool
     ) async throws -> Int64
 
     /// Scans a transaction for any information that can be decrypted by the accounts in the wallet, and saves it to the wallet.
@@ -224,11 +226,13 @@ protocol ZcashRustBackendWelding {
     /// Creates a transaction to shield all found UTXOs in data db for the account the provided `UnifiedSpendingKey` has spend authority for.
     /// - Parameter usk: `UnifiedSpendingKey` that spend transparent funds and where the funds will be shielded to.
     /// - Parameter memo: the `Memo` for this transaction
+    /// - Parameter useZIP317Fees: a flag indicating whether to use the ZIP-317 fee structure or not
     /// - Throws: `rustShieldFunds` if rust layer returns error.
     func shieldFunds(
         usk: UnifiedSpendingKey,
         memo: MemoBytes?,
-        shieldingThreshold: Zatoshi
+        shieldingThreshold: Zatoshi,
+        useZIP317Fees: Bool
     ) async throws -> Int64
 
     /// Gets the consensus branch id for the given height

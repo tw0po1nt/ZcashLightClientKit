@@ -13,6 +13,7 @@ class PendingTransactionUpdatesTest: ZcashTestCase {
     let sendAmount: Int64 = 1000
     var birthday: BlockHeight = 663150
     let defaultLatestHeight: BlockHeight = 663175
+    let useZIP317Fees = true
     var coordinator: TestCoordinator!
     var syncedExpectation = XCTestExpectation(description: "synced")
     var sentTransactionExpectation = XCTestExpectation(description: "sent")
@@ -86,7 +87,8 @@ class PendingTransactionUpdatesTest: ZcashTestCase {
                 spendingKey: self.coordinator.spendingKey,
                 zatoshi: Zatoshi(20000),
                 toAddress: try Recipient(Environment.testRecipientAddress, network: self.network.networkType),
-                memo: try Memo(string: "this is a test")
+                memo: try Memo(string: "this is a test"),
+                useZIP317Fees: useZIP317Fees
             )
             pendingEntity = pendingTx
             sendExpectation.fulfill()

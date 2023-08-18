@@ -16,6 +16,7 @@ class RewindRescanTests: ZcashTestCase {
     let defaultLatestHeight: BlockHeight = 663175
     let branchID = "2bb40e60"
     let chainName = "main"
+    let useZIP317Fees = true
 
     var cancellables: [AnyCancellable] = []
     var birthday: BlockHeight = 663150
@@ -239,7 +240,8 @@ class RewindRescanTests: ZcashTestCase {
                 spendingKey: coordinator.spendingKey,
                 zatoshi: Zatoshi(1000),
                 toAddress: try! Recipient(Environment.testRecipientAddress, network: .mainnet),
-                memo: .empty
+                memo: .empty,
+                useZIP317Fees: useZIP317Fees
             )
             XCTAssertEqual(Zatoshi(1000), pendingTx.value)
             sendExpectation.fulfill()
@@ -370,7 +372,8 @@ class RewindRescanTests: ZcashTestCase {
                 spendingKey: spendingKey,
                 zatoshi: maxBalance,
                 toAddress: try! Recipient(Environment.testRecipientAddress, network: .mainnet),
-                memo: try Memo(string: "test send \(self.description) \(Date().description)")
+                memo: try Memo(string: "test send \(self.description) \(Date().description)"),
+                useZIP317Fees: useZIP317Fees
             )
             pendingTx = transaction
             self.sentTransactionExpectation.fulfill()

@@ -13,6 +13,7 @@ import XCTest
 // FIXME: [#587] disabled until https://github.com/zcash/ZcashLightClientKit/issues/587 fixed
 class ShieldFundsTests: ZcashTestCase {
     let sendAmount = Zatoshi(1000)
+    let useZIP317Fees = true
     var birthday: BlockHeight = 1631000
     var coordinator: TestCoordinator!
     var syncedExpectation = XCTestExpectation(description: "synced")
@@ -216,7 +217,8 @@ class ShieldFundsTests: ZcashTestCase {
             let pendingTx = try await coordinator.synchronizer.shieldFunds(
                 spendingKey: coordinator.spendingKey,
                 memo: try Memo(string: "shield funds"),
-                shieldingThreshold: Zatoshi(10000)
+                shieldingThreshold: Zatoshi(10000),
+                useZIP317Fees: useZIP317Fees
             )
             shouldContinue = true
             XCTAssertEqual(pendingTx.value, Zatoshi(10000) - pendingTx.fee!)

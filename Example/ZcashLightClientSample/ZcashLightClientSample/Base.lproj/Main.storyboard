@@ -3,7 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -725,6 +725,20 @@
                                     </switch>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="NpR-2C-Ju4">
+                                <rect key="frame" x="20" y="314" width="170" height="31"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP-317 fees?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="svb-uY-Dku">
+                                        <rect key="frame" x="0.0" y="0.0" width="105" height="31"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tbU-FW-1eC" userLabel="ZIP-317 Fees?">
+                                        <rect key="frame" x="121" y="0.0" width="51" height="31"/>
+                                    </switch>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="8Pq-pM-WWH">
                                 <rect key="frame" x="21" y="186" width="349" height="32"/>
                                 <subviews>
@@ -783,7 +797,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mCk-Iy-qub" firstAttribute="leading" secondItem="jlC-eJ-vHy" secondAttribute="leading" constant="20" id="58F-y0-DKl"/>
-                            <constraint firstItem="06w-ih-1vw" firstAttribute="leading" secondItem="jlC-eJ-vHy" secondAttribute="leading" priority="250" constant="249" id="5hm-3u-gqf"/>
                             <constraint firstItem="TpC-jA-EZ0" firstAttribute="leading" secondItem="jlC-eJ-vHy" secondAttribute="leading" constant="20" id="74F-RD-ocb"/>
                             <constraint firstItem="jlC-eJ-vHy" firstAttribute="trailing" secondItem="z5U-bH-L1J" secondAttribute="trailing" constant="20" id="77V-Wr-CmR"/>
                             <constraint firstItem="8Pq-pM-WWH" firstAttribute="leading" secondItem="jlC-eJ-vHy" secondAttribute="leading" constant="21" id="9eL-mn-G69"/>
@@ -793,6 +806,7 @@
                             <constraint firstItem="z5U-bH-L1J" firstAttribute="top" secondItem="jlC-eJ-vHy" secondAttribute="top" constant="12" id="H7i-d9-U9Z"/>
                             <constraint firstItem="BEY-nq-CrN" firstAttribute="leading" secondItem="jlC-eJ-vHy" secondAttribute="leading" constant="21" id="NP9-3P-qx4"/>
                             <constraint firstItem="amG-KI-lq8" firstAttribute="leading" secondItem="jlC-eJ-vHy" secondAttribute="leading" constant="20" id="Ppd-B6-sBN"/>
+                            <constraint firstItem="NpR-2C-Ju4" firstAttribute="leading" secondItem="jlC-eJ-vHy" secondAttribute="leading" constant="20" id="QYJ-yv-ZEU"/>
                             <constraint firstItem="amG-KI-lq8" firstAttribute="top" secondItem="BEY-nq-CrN" secondAttribute="bottom" constant="21" id="RDQ-Ko-7RO"/>
                             <constraint firstItem="jlC-eJ-vHy" firstAttribute="trailing" secondItem="amG-KI-lq8" secondAttribute="trailing" constant="20" id="REE-Yq-77W"/>
                             <constraint firstItem="z5U-bH-L1J" firstAttribute="leading" secondItem="jlC-eJ-vHy" secondAttribute="leading" constant="20" id="W6E-vq-oWL"/>
@@ -803,6 +817,7 @@
                             <constraint firstItem="jlC-eJ-vHy" firstAttribute="trailing" secondItem="06w-ih-1vw" secondAttribute="trailing" constant="20" id="hIR-Zh-kbQ"/>
                             <constraint firstItem="jlC-eJ-vHy" firstAttribute="trailing" secondItem="8Pq-pM-WWH" secondAttribute="trailing" constant="20" id="hUv-ta-l4q"/>
                             <constraint firstItem="jlC-eJ-vHy" firstAttribute="trailing" secondItem="BEY-nq-CrN" secondAttribute="trailing" constant="20" id="iA7-Z0-oKC"/>
+                            <constraint firstItem="NpR-2C-Ju4" firstAttribute="top" secondItem="q7P-t6-O88" secondAttribute="bottom" constant="25" id="jTV-ZC-wWE"/>
                             <constraint firstItem="TpC-jA-EZ0" firstAttribute="top" secondItem="z5U-bH-L1J" secondAttribute="bottom" constant="15" id="lcW-d1-oOQ"/>
                             <constraint firstItem="jlC-eJ-vHy" firstAttribute="trailing" secondItem="TpC-jA-EZ0" secondAttribute="trailing" constant="20" id="mpa-Gj-WFZ"/>
                             <constraint firstItem="q7P-t6-O88" firstAttribute="leading" secondItem="jlC-eJ-vHy" secondAttribute="leading" constant="19" id="o2U-re-dlc"/>
@@ -823,6 +838,7 @@
                         <outlet property="sendButton" destination="Kti-hs-oWv" id="6Jq-Up-neP"/>
                         <outlet property="synchronizerStatusLabel" destination="z5U-bH-L1J" id="1V2-Qk-xI5"/>
                         <outlet property="verifiedBalanceLabel" destination="io7-QX-p59" id="VtQ-1V-ocI"/>
+                        <outlet property="zip317Fees" destination="tbU-FW-1eC" id="zae-g4-kae"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MLi-t7-xoi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1347,8 +1363,22 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="h1c-iV-PmE">
+                                        <rect key="frame" x="110" y="258" width="170" height="20.333333333333314"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZIP-317 fees?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQ9-jD-hWx">
+                                                <rect key="frame" x="0.0" y="0.0" width="105" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="luY-Bo-3uQ" userLabel="ZIP-317 Fees?">
+                                                <rect key="frame" x="121" y="0.0" width="51" height="20.333333333333332"/>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZXk-2m-Kua">
-                                        <rect key="frame" x="75" y="258" width="240" height="50"/>
+                                        <rect key="frame" x="75" y="318.33333333333331" width="240" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFx-Kk-dDU" userLabel="Shield these funds!">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="50"/>
@@ -1364,13 +1394,13 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mv9-ye-VIn">
-                                        <rect key="frame" x="16" y="348" width="358" height="0.0"/>
+                                        <rect key="frame" x="16" y="408.33333333333331" width="358" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pcE-rS-DWU">
-                                        <rect key="frame" x="0.0" y="388" width="390" height="331"/>
+                                        <rect key="frame" x="0.0" y="448.33333333333337" width="390" height="270.66666666666663"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                 </subviews>
@@ -1400,6 +1430,7 @@
                         <outlet property="totalBalanceLabel" destination="WbJ-AR-1Pj" id="eWj-1C-HBs"/>
                         <outlet property="transparentAddressLabel" destination="1NQ-co-Y8P" id="PcX-vz-CDf"/>
                         <outlet property="verifiedBalanceLabel" destination="p9L-dk-3rL" id="TLN-Nl-Qb3"/>
+                        <outlet property="zip317Fees" destination="luY-Bo-3uQ" id="mSo-3a-TCQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GFR-y5-3AF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

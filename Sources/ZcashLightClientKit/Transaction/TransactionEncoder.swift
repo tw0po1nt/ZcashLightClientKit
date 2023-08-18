@@ -29,6 +29,7 @@ protocol TransactionEncoder {
     /// - Parameter to: string containing the recipient address
     /// - Parameter MemoBytes: string containing the memo (optional)
     /// - Parameter accountIndex: index of the account that will be used to send the funds
+    /// - Parameter useZIP317Fees: a flag indicating whether to use the ZIP-317 fee structure or not
     /// - Throws:
     ///     - `walletTransEncoderCreateTransactionMissingSaplingParams` if the sapling parameters aren't downloaded.
     ///     - Some `ZcashError.rust*` if the creation of transaction fails.
@@ -37,7 +38,8 @@ protocol TransactionEncoder {
         zatoshi: Zatoshi,
         to address: String,
         memoBytes: MemoBytes?,
-        from accountIndex: Int
+        from accountIndex: Int,
+        useZIP317Fees: Bool
     ) async throws -> ZcashTransaction.Overview
     
     /// Creates a transaction that will attempt to shield transparent funds that are present on the blocks cache .throwing
@@ -48,6 +50,7 @@ protocol TransactionEncoder {
     /// - Parameter spendingKey: `UnifiedSpendingKey` to spend the UTXOs
     /// - Parameter memoBytes: containing the memo (optional)
     /// - Parameter accountIndex: index of the account that will be used to send the funds
+    /// - Parameter useZIP317Fees: a flag indicating whether to use the ZIP-317 fee structure or not
     /// - Throws:
     ///     - `walletTransEncoderShieldFundsMissingSaplingParams` if the sapling parameters aren't downloaded.
     ///     - Some `ZcashError.rust*` if the creation of transaction fails.
@@ -55,7 +58,8 @@ protocol TransactionEncoder {
         spendingKey: UnifiedSpendingKey,
         shieldingThreshold: Zatoshi,
         memoBytes: MemoBytes?,
-        from accountIndex: Int
+        from accountIndex: Int,
+        useZIP317Fees: Bool
     ) async throws -> ZcashTransaction.Overview
 
     /// submits a transaction to the Zcash peer-to-peer network.
