@@ -144,6 +144,7 @@ public class SDKSynchronizer: Synchronizer {
         
         await latestBlocksDataProvider.updateWalletBirthday(initializer.walletBirthday)
         await latestBlocksDataProvider.updateScannedData()
+        await latestBlocksDataProvider.updateBlockData()
         
         await updateStatus(.disconnected, updateExternalStatus: false)
 
